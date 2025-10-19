@@ -12,6 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { ShareLesson } from "@/components/share-lesson";
 import { getUserProgress, completeLesson } from "@/lib/storage";
 import type { UserProgress } from "@/types";
 
@@ -95,7 +96,15 @@ export function LessonClient({
         </div>
 
         <h1 className="mb-4 text-4xl font-bold">{title}</h1>
-        <p className="text-lg text-muted-foreground">{description}</p>
+        <p className="text-lg text-muted-foreground mb-4">{description}</p>
+
+        {/* Share Button */}
+        <div className="flex items-center gap-2">
+          <ShareLesson
+            title={title}
+            moduleTitle={`Module ${moduleSlug.split('-')[0]}`}
+          />
+        </div>
       </div>
 
       {/* Lesson Content (MDX) */}
