@@ -3,14 +3,15 @@
  * Core types for the learning platform
  */
 
-export type DifficultyLevel = "beginner" | "intermediate" | "expert"
+export type DifficultyLevel = "beginner" | "intermediate" | "advanced" | "expert"
 
 export type LessonContentType = "text" | "code" | "diagram" | "interactive" | "video"
 
 export interface LessonContent {
   type: LessonContentType
   title?: string
-  content: string
+  content?: string // optional for old module structure (some use 'code' instead)
+  code?: string // optional for old module structure (use content instead)
   language?: string // for code blocks
   caption?: string
 }
@@ -19,27 +20,30 @@ export interface Lesson {
   id: string
   title: string
   slug: string
-  description: string
+  description?: string // optional for old module structure
   duration: number // in minutes
-  order: number
+  order?: number // optional for old module structure
   content?: LessonContent[] // optional for MDX lessons
   keyTakeaways?: string[] // optional for MDX lessons
   prerequisites?: string[] // lesson IDs
+  quiz?: Quiz | QuizQuestion[] // optional for old module structure (deprecated)
 }
 
 export interface QuizQuestion {
-  id: string
+  id?: string // optional for old module structure
   question: string
   options: string[]
   correctAnswer: number // index of correct option
   explanation: string
-  difficulty: DifficultyLevel
-  relatedLessonId: string
+  difficulty?: DifficultyLevel // optional for old module structure
+  relatedLessonId?: string // optional for old module structure
 }
 
 export interface Quiz {
-  id: string
-  moduleId: string
+  id?: string // optional for old module structure (can be inferred from parent)
+  moduleId?: string // optional for old module structure (can be inferred from parent)
+  title?: string // optional for old module structure
+  description?: string // optional for old module structure
   questions: QuizQuestion[]
   passingScore: number // percentage (e.g., 80)
   timeLimit?: number // in minutes, optional
@@ -50,14 +54,16 @@ export interface Module {
   title: string
   slug: string
   description: string
+  icon?: string // optional for old module structure
   difficulty: DifficultyLevel
-  order: number
+  order?: number // optional for old module structure
   estimatedHours: number
+  prerequisiteModules?: string[] // module IDs for old structure
   lessons: Lesson[]
-  quiz: Quiz
+  quiz?: Quiz | QuizQuestion[] // optional for old module structure (some modules may not have quizzes yet, or quiz might be array)
   prerequisites?: string[] // module IDs
   badge: Badge
-  learningObjectives: string[]
+  learningObjectives?: string[] // optional for old module structure
 }
 
 export interface Badge {
@@ -65,8 +71,8 @@ export interface Badge {
   name: string
   description: string
   icon: string // emoji or icon name
-  color: string // CSS color value
-  moduleId: string
+  color?: string // optional for old module structure - CSS color value
+  moduleId?: string // optional for old module structure (can be inferred from parent)
 }
 
 export interface LessonProgress {

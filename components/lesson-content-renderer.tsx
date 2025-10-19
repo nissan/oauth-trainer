@@ -159,9 +159,10 @@ function ContentSection({ section }: { section: LessonContent }) {
 
           // Generate a valid CSS selector ID (must start with a letter)
           const diagramId = `diagram-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`
+          const diagramContent = section.content || section.code || ""
           const { svg } = await mermaid.render(
             diagramId,
-            section.content
+            diagramContent
           )
           if (mermaidRef.current) {
             mermaidRef.current.innerHTML = svg
@@ -170,7 +171,8 @@ function ContentSection({ section }: { section: LessonContent }) {
           console.error("Mermaid rendering error:", error)
           // Fallback to showing raw content
           if (mermaidRef.current) {
-            mermaidRef.current.innerHTML = `<pre class="text-sm text-muted-foreground">${section.content}</pre>`
+            const diagramContent = section.content || section.code || ""
+            mermaidRef.current.innerHTML = `<pre class="text-sm text-muted-foreground">${diagramContent}</pre>`
           }
         }
       }
@@ -241,6 +243,7 @@ function ContentSection({ section }: { section: LessonContent }) {
                     </code>
                   ) : (
                     <SyntaxHighlighter
+                      // @ts-ignore - vscDarkPlus type is union but works at runtime
                       style={syntaxStyle}
                       language={match[1]}
                       PreTag="div"
@@ -284,7 +287,7 @@ function ContentSection({ section }: { section: LessonContent }) {
                 ),
               }}
             >
-              {section.content}
+              {section.content || section.code || ""}
             </ReactMarkdown>
           </div>
         </div>
@@ -305,6 +308,7 @@ function ContentSection({ section }: { section: LessonContent }) {
             <div className="overflow-x-auto">
               <SyntaxHighlighter
                 language={section.language || "text"}
+                // @ts-ignore - vscDarkPlus type is union but works at runtime
                 style={syntaxStyle}
                 customStyle={{
                   margin: 0,
@@ -314,7 +318,7 @@ function ContentSection({ section }: { section: LessonContent }) {
                 }}
                 showLineNumbers={section.language !== "text"}
               >
-                {section.content}
+                {section.content || section.code || ""}
               </SyntaxHighlighter>
             </div>
             {section.caption && (

@@ -1,6 +1,10 @@
-import type { MDXComponents } from "mdx/types";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import type React from "react";
+
+type MDXComponents = {
+  [key: string]: React.ComponentType<any>;
+};
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {

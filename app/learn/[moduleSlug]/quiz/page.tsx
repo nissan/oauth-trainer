@@ -39,7 +39,8 @@ export default function QuizPage({ params }: { params: Promise<{ moduleSlug: str
   const [userProgress, setUserProgress] = useState(getUserProgress())
 
   // Get current question
-  const questions = module?.quiz.questions || []
+  const quiz = module?.quiz
+  const questions = Array.isArray(quiz) ? quiz : (quiz?.questions || [])
   const currentQuestion = questions[currentQuestionIndex]
   const totalQuestions = questions.length
 
@@ -121,7 +122,8 @@ export default function QuizPage({ params }: { params: Promise<{ moduleSlug: str
       correctAnswers: correctCount,
       totalQuestions,
       answers: selectedAnswers.reduce((acc, answer, idx) => {
-        acc[questions[idx].id] = answer
+        const questionId = questions[idx].id || `q-${idx}`
+        acc[questionId] = answer
         return acc
       }, {} as Record<string, number>),
       passed: finalScore >= PASSING_SCORE,

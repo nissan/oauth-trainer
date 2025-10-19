@@ -30,6 +30,7 @@ export function ModuleCard({ module, progress, locked = false }: ModuleCardProps
   const difficultyColors = {
     beginner: "beginner",
     intermediate: "intermediate",
+    advanced: "advanced",
     expert: "expert",
   } as const
 

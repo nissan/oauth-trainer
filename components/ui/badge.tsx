@@ -20,6 +20,8 @@ const badgeVariants = cva(
           "border-transparent bg-beginner text-white hover:bg-beginner/80",
         intermediate:
           "border-transparent bg-intermediate text-white hover:bg-intermediate/80",
+        advanced:
+          "border-transparent bg-advanced text-white hover:bg-advanced/80",
         expert:
           "border-transparent bg-expert text-white hover:bg-expert/80",
       },
