@@ -11,6 +11,10 @@ import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism"
 import type { LessonContent } from "@/types"
 import { Card, CardContent } from "@/components/ui/card"
 import mermaid from "mermaid"
+import React from "react"
+
+// Type-safe wrapper for syntax highlighter style
+const syntaxStyle = vscDarkPlus as { [key: string]: React.CSSProperties }
 
 interface LessonContentRendererProps {
   content: LessonContent[]
@@ -237,7 +241,7 @@ function ContentSection({ section }: { section: LessonContent }) {
                     </code>
                   ) : (
                     <SyntaxHighlighter
-                      style={vscDarkPlus as { [key: string]: React.CSSProperties }}
+                      style={syntaxStyle}
                       language={match[1]}
                       PreTag="div"
                       className="rounded-md my-4"
@@ -301,7 +305,7 @@ function ContentSection({ section }: { section: LessonContent }) {
             <div className="overflow-x-auto">
               <SyntaxHighlighter
                 language={section.language || "text"}
-                style={vscDarkPlus as { [key: string]: React.CSSProperties }}
+                style={syntaxStyle}
                 customStyle={{
                   margin: 0,
                   borderRadius: 0,
