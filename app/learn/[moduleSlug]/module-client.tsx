@@ -14,6 +14,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { LessonCard } from "@/components/lesson-card";
+import { PasswordGate } from "@/components/password-gate";
 import { getUserProgress } from "@/lib/storage";
 import type { UserProgress } from "@/types";
 import type { ModuleMetadata } from "@/lib/content-types";
@@ -87,6 +88,7 @@ export function ModuleClient({
     beginner: "beginner",
     intermediate: "intermediate",
     expert: "expert",
+    advanced: "expert", // map advanced to expert styling
   } as const;
 
   const firstIncompleteLesson = lessons.find((lesson) => {
@@ -98,7 +100,7 @@ export function ModuleClient({
     ? firstIncompleteLesson.slug
     : lessons[0]?.slug;
 
-  return (
+  const moduleContent = (
     <>
       {incompletePrerequisites.length > 0 && (
         <Card className="mb-6 border-warning/50 bg-warning/5">
@@ -310,4 +312,15 @@ export function ModuleClient({
       )}
     </>
   );
+
+  // Wrap content with password gate if required
+  if (metadata.requiresPassword && metadata.password) {
+    return (
+      <PasswordGate password={metadata.password} moduleId={metadata.id}>
+        {moduleContent}
+      </PasswordGate>
+    );
+  }
+
+  return moduleContent;
 }

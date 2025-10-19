@@ -18,7 +18,7 @@ export interface ModuleMetadata {
   order: number;
   title: string;
   description: string;
-  difficulty: "beginner" | "intermediate" | "expert";
+  difficulty: "beginner" | "intermediate" | "expert" | "advanced";
   estimatedHours: number;
   badge: {
     name: string;
@@ -27,6 +27,8 @@ export interface ModuleMetadata {
   };
   learningObjectives: string[];
   prerequisiteModules: string[]; // slugs of prerequisite modules
+  requiresPassword?: boolean; // if true, module requires password to access
+  password?: string; // the password required to access the module
 }
 
 export interface QuizQuestion {

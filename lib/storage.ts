@@ -296,3 +296,108 @@ export function importProgress(jsonData: string): boolean {
     return false
   }
 }
+
+/**
+ * Save case study response
+ */
+export function saveCaseStudyResponse(
+  moduleId: string,
+  lessonId: string,
+  response: string,
+): void {
+  const progress = getUserProgress()
+
+  if (!progress.caseStudyProgress) {
+    progress.caseStudyProgress = {}
+  }
+
+  if (!progress.caseStudyProgress[moduleId]) {
+    progress.caseStudyProgress[moduleId] = {
+      moduleId,
+      responses: {},
+      completed: false,
+    }
+  }
+
+  progress.caseStudyProgress[moduleId].responses[lessonId] = {
+    lessonId,
+    response,
+    lastModified: new Date(),
+    completedAt: new Date(),
+  }
+
+  saveUserProgress(progress)
+}
+
+/**
+ * Get case study response
+ */
+export function getCaseStudyResponse(
+  moduleId: string,
+  lessonId: string,
+): string {
+  const progress = getUserProgress()
+
+  if (!progress.caseStudyProgress?.[moduleId]?.responses[lessonId]) {
+    return ""
+  }
+
+  return progress.caseStudyProgress[moduleId].responses[lessonId].response
+}
+
+/**
+ * Get all case study responses for a module
+ */
+export function getAllCaseStudyResponses(
+  moduleId: string,
+): Record<string, string> {
+  const progress = getUserProgress()
+
+  if (!progress.caseStudyProgress?.[moduleId]) {
+    return {}
+  }
+
+  const responses: Record<string, string> = {}
+  for (const [lessonId, data] of Object.entries(
+    progress.caseStudyProgress[moduleId].responses,
+  )) {
+    responses[lessonId] = data.response
+  }
+
+  return responses
+}
+
+/**
+ * Check if case study module is completed
+ */
+export function isCaseStudyCompleted(
+  moduleId: string,
+  totalLessons: number,
+): boolean {
+  const progress = getUserProgress()
+
+  if (!progress.caseStudyProgress?.[moduleId]) {
+    return false
+  }
+
+  const responseCount = Object.keys(
+    progress.caseStudyProgress[moduleId].responses,
+  ).length
+  return responseCount >= totalLessons
+}
+
+/**
+ * Mark case study as completed
+ */
+export function completeCaseStudy(moduleId: string): void {
+  const progress = getUserProgress()
+
+  if (!progress.caseStudyProgress?.[moduleId]) {
+    return
+  }
+
+  progress.caseStudyProgress[moduleId].completed = true
+  progress.caseStudyProgress[moduleId].completedAt = new Date()
+
+  saveUserProgress(progress)
+}

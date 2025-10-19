@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { cn } from "@/lib/utils";
 import type React from "react";
 import { MermaidDiagram } from "@/components/mermaid-diagram";
+import { CaseStudyResponseWrapper } from "@/components/case-study-response-wrapper";
 
 type MDXComponents = {
   [key: string]: React.ComponentType<any>;
@@ -180,6 +181,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         </Card>
       );
     },
+    CaseStudyResponse: CaseStudyResponseWrapper,
     ...components,
   };
 }

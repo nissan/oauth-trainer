@@ -111,6 +111,7 @@ export interface UserProgress {
   createdAt: Date
   lastActive: Date
   moduleProgress: Record<string, ModuleProgress>
+  caseStudyProgress?: Record<string, CaseStudyProgress> // moduleId -> case study progress
   totalLessonsCompleted: number
   totalQuizzesPassed: number
   totalTimeSpent: number
@@ -131,6 +132,21 @@ export interface LearningStats {
   totalTimeSpent: number
   streak: number // consecutive days of learning
   lastActiveDate: Date
+}
+
+// Case Study types
+export interface CaseStudyResponse {
+  lessonId: string
+  response: string
+  completedAt?: Date
+  lastModified: Date
+}
+
+export interface CaseStudyProgress {
+  moduleId: string
+  responses: Record<string, CaseStudyResponse> // lessonId -> response
+  completed: boolean
+  completedAt?: Date
 }
 
 // Helper types for UI components
