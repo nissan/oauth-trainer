@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import type React from "react";
+import { MermaidDiagram } from "@/components/mermaid-diagram";
 
 type MDXComponents = {
   [key: string]: React.ComponentType<any>;
@@ -78,15 +79,30 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {...props}
       />
     ),
-    pre: ({ className, ...props }) => (
-      <pre
-        className={cn(
-          "mb-4 mt-6 overflow-x-auto rounded-lg border bg-card p-4",
-          className
-        )}
-        {...props}
-      />
-    ),
+    pre: ({ className, children, ...props }: { className?: string; children?: React.ReactNode }) => {
+      // Check if this is a mermaid code block
+      const childElement = children as React.ReactElement<{ className?: string; children?: string }>
+      if (
+        childElement?.props?.className &&
+        typeof childElement.props.className === "string" &&
+        childElement.props.className.includes("language-mermaid") &&
+        typeof childElement?.props?.children === "string"
+      ) {
+        return <MermaidDiagram chart={childElement.props.children} />
+      }
+
+      return (
+        <pre
+          className={cn(
+            "mb-4 mt-6 overflow-x-auto rounded-lg border bg-card p-4",
+            className
+          )}
+          {...props}
+        >
+          {children}
+        </pre>
+      )
+    },
     table: ({ className, ...props }) => (
       <div className="my-6 w-full overflow-y-auto">
         <table className={cn("w-full", className)} {...props} />
