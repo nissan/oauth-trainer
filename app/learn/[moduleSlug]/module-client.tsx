@@ -243,55 +243,57 @@ export function ModuleClient({
         </div>
       </div>
 
-      {/* Quiz Card */}
-      <Card className="border-accent/50 bg-accent/5">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <span>📝</span>
-            Module Quiz
-          </CardTitle>
-          <CardDescription>
-            Test your knowledge with {quiz.questions.length} questions. Pass
-            with {quiz.passingScore}% or higher to earn your badge.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          {moduleProgress?.quizAttempts &&
-            moduleProgress.quizAttempts.length > 0 && (
-              <div className="mb-4 rounded-md bg-background/50 p-4">
-                <div className="text-sm font-medium">Previous Attempts</div>
-                <div className="mt-2 space-y-2">
-                  {moduleProgress.quizAttempts.slice(-3).map((attempt, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center justify-between text-sm"
-                    >
-                      <span className="text-muted-foreground">
-                        Attempt {attempt.attemptNumber}
-                      </span>
-                      <span
-                        className={
-                          attempt.passed ? "text-success" : "text-destructive"
-                        }
+      {/* Quiz Card - Only show if quiz exists */}
+      {quiz && quiz.questions && quiz.questions.length > 0 && (
+        <Card className="border-accent/50 bg-accent/5">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <span>📝</span>
+              Module Quiz
+            </CardTitle>
+            <CardDescription>
+              Test your knowledge with {quiz.questions.length} questions. Pass
+              with {quiz.passingScore}% or higher to earn your badge.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            {moduleProgress?.quizAttempts &&
+              moduleProgress.quizAttempts.length > 0 && (
+                <div className="mb-4 rounded-md bg-background/50 p-4">
+                  <div className="text-sm font-medium">Previous Attempts</div>
+                  <div className="mt-2 space-y-2">
+                    {moduleProgress.quizAttempts.slice(-3).map((attempt, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center justify-between text-sm"
                       >
-                        {Math.round(attempt.score)}% {attempt.passed && "✓"}
-                      </span>
-                    </div>
-                  ))}
+                        <span className="text-muted-foreground">
+                          Attempt {attempt.attemptNumber}
+                        </span>
+                        <span
+                          className={
+                            attempt.passed ? "text-success" : "text-destructive"
+                          }
+                        >
+                          {Math.round(attempt.score)}% {attempt.passed && "✓"}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
 
-          <Link href={`/learn/${moduleSlug}/quiz`}>
-            <Button
-              variant={moduleProgress?.completed ? "secondary" : "default"}
-              className="w-full"
-            >
-              {moduleProgress?.completed ? "Retake Quiz" : "Take Quiz"}
-            </Button>
-          </Link>
-        </CardContent>
-      </Card>
+            <Link href={`/learn/${moduleSlug}/quiz`}>
+              <Button
+                variant={moduleProgress?.completed ? "secondary" : "default"}
+                className="w-full"
+              >
+                {moduleProgress?.completed ? "Retake Quiz" : "Take Quiz"}
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Badge Preview */}
       {moduleProgress?.badgeEarned && (
