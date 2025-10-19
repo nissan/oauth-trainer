@@ -13,12 +13,22 @@ import type { QuizQuestion } from "@/types"
 
 const PASSING_SCORE = 80 // 80% to pass
 
-export default function QuizPage({ params }: { params: { moduleSlug: string } }) {
+export default function QuizPage({ params }: { params: Promise<{ moduleSlug: string }> }) {
   const router = useRouter()
-  const moduleSlug = params.moduleSlug
+  const [moduleSlug, setModuleSlug] = useState<string | null>(null)
+
+  // Unwrap params promise
+  useEffect(() => {
+    params.then((p) => setModuleSlug(p.moduleSlug))
+  }, [params])
 
   // Find the module
   const module = modules.find((m) => m.slug === moduleSlug)
+
+  // Show loading state while params are being resolved
+  if (!moduleSlug) {
+    return <div className="container mx-auto px-4 py-8">Loading...</div>
+  }
 
   // State management
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
