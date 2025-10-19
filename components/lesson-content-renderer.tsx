@@ -21,7 +21,7 @@ function getMermaidConfig(isDark: boolean) {
   if (isDark) {
     return {
       startOnLoad: false,
-      theme: "base",
+      theme: "base" as const,
       themeVariables: {
         primaryColor: "#3b82f6",
         primaryTextColor: "#e2e8f0",
@@ -74,7 +74,7 @@ function getMermaidConfig(isDark: boolean) {
   // Light mode
   return {
     startOnLoad: false,
-    theme: "base",
+    theme: "base" as const,
     themeVariables: {
       primaryColor: "#3b82f6",
       primaryTextColor: "#1e293b",
