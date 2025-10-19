@@ -60,16 +60,16 @@ Autonomous systems must cache limited-duration authorization proofs:
    - Mission context (training exercise, active defense, coalition operation)
 
 2. **Capability Tokens**: RFC 7519 (JWT) claims encoding specific permissions:
-   ```json
-   {
+   \`\`\`json
+   {"{"}
      "sub": "unit:apex-cm-42981",
      "authorized_actions": ["detect", "classify", "engage_defensive"],
      "geo_fence": "lat:35.5,lon:139.8,radius:50km",
      "mission": "operation-northern-shield",
      "nbf": 1640000000,
      "exp": 1640259600
-   }
-   ```
+   {"}"}
+   \`\`\`
 
 3. **Local Policy Engine**: Embedded OPA/Cedar policy engine evaluates cached tokens against real-time threat data
 4. **Grace Period**: Systems operate up to 72 hours offline; return to base/connectivity for token refresh

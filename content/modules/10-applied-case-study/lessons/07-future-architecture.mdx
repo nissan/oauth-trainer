@@ -135,28 +135,28 @@ Rationale:
 - **Phase 4**: Policy governance: dedicated team manages policies, approval workflows
 
 **Example Policy (Rego)**:
-```rego
+\`\`\`rego
 package apex.authorization
 
 default allow = false
 
-allow {
+allow {"{"}
   input.user.clearance_level >= data.resources[input.resource_id].classification
   input.user.need_to_know[_] == data.resources[input.resource_id].compartment
   valid_device
   valid_time
-}
+{"}"}
 
-valid_device {
+valid_device {"{"}
   input.device.compliant == true
   input.device.tpm_attested == true
-}
+{"}"}
 
-valid_time {
+valid_time {"{"}
   input.mission.status == "active"
   time.now_ns() < input.mission.end_time
-}
-```
+{"}"}
+\`\`\`
 
 **Emerging Technologies:**
 

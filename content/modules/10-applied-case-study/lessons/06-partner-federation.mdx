@@ -84,7 +84,7 @@ Delegated contractor access without direct federation:
 1. **Contractor Authentication**: Engineer authenticates with their company IdP (e.g., Lockheed Martin Azure AD)
 2. **Initial Token**: Receives OAuth access token from their organization
 3. **Token Exchange Request**: Sends token to Apex authorization server:
-   ```http
+   \`\`\`http
    POST /token HTTP/1.1
    Host: auth.apexdefense.gov.au
    Content-Type: application/x-www-form-urlencoded
@@ -94,7 +94,7 @@ Delegated contractor access without direct federation:
    &subject_token_type=urn:ietf:params:oauth:token-type:access_token
    &scope=read:telemetry write:maintenance-logs
    &audience=https://api.apexdefense.gov.au
-   ```
+   \`\`\`
 
 4. **Token Validation**: Apex validates contractor token with partner IdP
 5. **Scoped Token Issuance**: Apex issues limited-scope access token with:
@@ -117,21 +117,21 @@ Automated provisioning across organizational boundaries:
    - **Deprovisioning**: Analyst leaves agency → Apex access immediately revoked
 
 3. **SCIM Schema Extensions**: Custom attributes for defense context:
-   ```json
-   {
+   \`\`\`json
+   {"{"}
      "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User",
                  "urn:apex:scim:extension:security:1.0"],
      "userName": "martinez@nato.int",
-     "name": {"givenName": "Elena", "familyName": "Martinez"},
-     "urn:apex:scim:extension:security:1.0": {
+     "name": {"{"}"givenName": "Elena", "familyName": "Martinez"{"}"},
+     "urn:apex:scim:extension:security:1.0": {"{"}
        "clearanceLevel": "NATO_SECRET",
        "caveats": ["COSMIC_TOP_SECRET"],
        "nationality": "ESP",
        "organization": "NATO_ACO",
        "needToKnow": ["BALTIC_OPS"]
-     }
-   }
-   ```
+     {"}"}
+   {"}"}
+   \`\`\`
 
 4. **Bidirectional Sync**: Apex can also push updates back to partners (e.g., training completion, certification status)
 5. **Just-in-Time Provisioning**: For ad-hoc access, SAML/OIDC assertions trigger automatic account creation

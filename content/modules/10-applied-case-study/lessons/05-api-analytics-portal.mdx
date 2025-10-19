@@ -61,25 +61,25 @@ Design API security and authorization for the Analytics Portal. Focus on clearan
 Multi-attribute authorization using OIDC claims:
 
 1. **Clearance Level Claims**: IdP issues ID tokens with clearance attributes:
-   ```json
-   {
+   \`\`\`json
+   {"{"}
      "sub": "analyst-martinez-6471",
      "clearance_level": "TS/SCI",
      "clearance_caveat": ["SI", "TK", "NOFORN"],
      "need_to_know": ["INDOPACIFIC-OPS", "AI-THREAT-MODELS"],
      "organization": "AUS-DEFENCE-INTEL",
      "citizenship": "AUS"
-   }
-   ```
+   {"}"}
+   \`\`\`
 
 2. **Policy-as-Code Authorization**: OPA/Cedar policies evaluate claims against resource metadata:
-   ```rego
-   allow {
+   \`\`\`rego
+   allow {"{"}
      input.user.clearance_level >= data.resource.classification
      input.user.need_to_know[_] == data.resource.compartment
      data.resource.citizenship_restriction == input.user.citizenship
-   }
-   ```
+   {"}"}
+   \`\`\`
 
 3. **Attribute Propagation**: Access tokens include clearance claims; API gateway validates on every request
 4. **Dynamic Adjustment**: Real-time clearance revocation via token introspection or short token lifetimes (15 min)

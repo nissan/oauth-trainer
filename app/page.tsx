@@ -1,15 +1,13 @@
-import { modules as oldModules } from "@/data/modules"
 import { getAllModules } from "@/lib/content"
 import type { Module } from "@/types"
 import { HomeClient } from "./home-client"
 
 export default function Home() {
-  // Combine MDX and old TypeScript modules
+  // Only show MDX modules - old TypeScript modules are being phased out
   const mdxModules = getAllModules()
-  const mdxModuleSlugs = new Set(mdxModules.map(m => m.metadata.slug))
 
   // Convert MDX modules to the Module type expected by the UI
-  const convertedMdxModules: Module[] = mdxModules.map(m => ({
+  const modules: Module[] = mdxModules.map(m => ({
     id: m.metadata.id,
     title: m.metadata.title,
     slug: m.metadata.slug,
@@ -36,13 +34,7 @@ export default function Home() {
       content: [] // Content is loaded separately for MDX
     })),
     quiz: m.quiz
-  }))
-
-  // Only include old modules that don't have MDX versions
-  const filteredOldModules = oldModules.filter(m => !mdxModuleSlugs.has(m.slug))
-
-  // Combine and sort by order
-  const modules = [...convertedMdxModules, ...filteredOldModules].sort((a, b) => (a.order || 0) - (b.order || 0))
+  })).sort((a, b) => (a.order || 0) - (b.order || 0))
 
   return <HomeClient modules={modules} />
 }
