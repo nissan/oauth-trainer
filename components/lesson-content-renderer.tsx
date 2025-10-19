@@ -53,7 +53,7 @@ function getMermaidConfig(isDark: boolean) {
         activationBkgColor: "#1e3a5f",
         sequenceNumberColor: "#e2e8f0"
       },
-      securityLevel: "loose",
+      securityLevel: "loose" as const,
       fontFamily: "system-ui, -apple-system, sans-serif",
       sequence: {
         diagramMarginX: 20,
@@ -106,7 +106,7 @@ function getMermaidConfig(isDark: boolean) {
       activationBkgColor: "#dbeafe",
       sequenceNumberColor: "#ffffff"
     },
-    securityLevel: "loose",
+    securityLevel: "loose" as const,
     fontFamily: "system-ui, -apple-system, sans-serif",
     sequence: {
       diagramMarginX: 20,
