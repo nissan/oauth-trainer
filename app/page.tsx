@@ -7,9 +7,10 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { ModuleCard } from "@/components/module-card"
 import { ModeToggle } from "@/components/mode-toggle"
-import { modules } from "@/data/modules"
+import { modules as oldModules } from "@/data/modules"
+import { getAllModules } from "@/lib/content"
 import { getUserProgress, getLearningStats } from "@/lib/storage"
-import type { UserProgress } from "@/types"
+import type { UserProgress, Module } from "@/types"
 
 export default function Home() {
   const [userProgress, setUserProgress] = useState<UserProgress | null>(null)
@@ -24,6 +25,42 @@ export default function Home() {
   if (!mounted) {
     return null // Prevent hydration mismatch
   }
+
+  // Combine MDX and old TypeScript modules
+  const mdxModules = getAllModules()
+  const mdxModuleSlugs = new Set(mdxModules.map(m => m.metadata.slug))
+
+  // Convert MDX modules to the Module type expected by the UI
+  const convertedMdxModules: Module[] = mdxModules.map(m => ({
+    id: m.metadata.id,
+    title: m.metadata.title,
+    slug: m.metadata.slug,
+    description: m.metadata.description,
+    difficulty: m.metadata.difficulty,
+    estimatedHours: m.metadata.estimatedHours,
+    badge: m.metadata.badge,
+    learningObjectives: m.metadata.learningObjectives,
+    prerequisiteModules: m.metadata.prerequisiteModules,
+    order: m.metadata.order,
+    lessons: m.lessons.map(lesson => ({
+      id: lesson.frontmatter.slug,
+      slug: lesson.slug,
+      title: lesson.frontmatter.title,
+      description: lesson.frontmatter.description,
+      duration: lesson.frontmatter.duration,
+      order: lesson.frontmatter.order,
+      keyTakeaways: lesson.frontmatter.keyTakeaways,
+      prerequisites: lesson.frontmatter.prerequisites,
+      content: [] // Content is loaded separately for MDX
+    })),
+    quiz: m.quiz
+  }))
+
+  // Only include old modules that don't have MDX versions
+  const filteredOldModules = oldModules.filter(m => !mdxModuleSlugs.has(m.slug))
+
+  // Combine and sort by order
+  const modules = [...convertedMdxModules, ...filteredOldModules].sort((a, b) => (a.order || 0) - (b.order || 0))
 
   const hasStarted = userProgress && Object.keys(userProgress.moduleProgress).length > 0
   const stats = getLearningStats(modules.length, modules.reduce((sum, m) => sum + m.lessons.length, 0))

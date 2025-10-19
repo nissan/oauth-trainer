@@ -4,7 +4,8 @@
  */
 
 import { executiveOverviewModule } from "./00-executive-overview"
-import { authFundamentalsModule } from "./01-auth-fundamentals"
+// Module 01 now uses MDX content from content/modules/01-auth-fundamentals/
+// import { authFundamentalsModule } from "./01-auth-fundamentals"
 import { oauth2Module } from "./02-oauth2"
 import { oidcModule } from "./03-oidc"
 import { samlModule } from "./04-saml"
@@ -17,7 +18,7 @@ import type { Module, CourseStructure } from "@/types"
 
 export const modules: Module[] = [
   executiveOverviewModule,
-  authFundamentalsModule,
+  // authFundamentalsModule, // Now uses MDX from content/modules/01-auth-fundamentals/
   oauth2Module,
   oidcModule,
   samlModule,
