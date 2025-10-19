@@ -237,7 +237,7 @@ function ContentSection({ section }: { section: LessonContent }) {
                     </code>
                   ) : (
                     <SyntaxHighlighter
-                      style={vscDarkPlus}
+                      style={vscDarkPlus as { [key: string]: React.CSSProperties }}
                       language={match[1]}
                       PreTag="div"
                       className="rounded-md my-4"
@@ -301,7 +301,7 @@ function ContentSection({ section }: { section: LessonContent }) {
             <div className="overflow-x-auto">
               <SyntaxHighlighter
                 language={section.language || "text"}
-                style={vscDarkPlus}
+                style={vscDarkPlus as { [key: string]: React.CSSProperties }}
                 customStyle={{
                   margin: 0,
                   borderRadius: 0,
