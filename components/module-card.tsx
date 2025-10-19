@@ -27,6 +27,8 @@ export function ModuleCard({ module, progress, locked = false }: ModuleCardProps
   const totalLessons = module.lessons.length
   const progressPercent = totalLessons > 0 ? (completedLessons / totalLessons) * 100 : 0
 
+  const isComingSoon = module.isMigrated === false
+
   const difficultyColors = {
     beginner: "beginner",
     intermediate: "intermediate",
@@ -38,7 +40,18 @@ export function ModuleCard({ module, progress, locked = false }: ModuleCardProps
 
   return (
     <Card className="group relative overflow-hidden transition-all hover:shadow-lg">
-      {locked && (
+      {isComingSoon && (
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+          <div className="text-center">
+            <p className="text-sm font-medium text-amber-600 dark:text-amber-400">🚧 Coming Soon</p>
+            <p className="text-xs text-muted-foreground">
+              Module migration in progress
+            </p>
+          </div>
+        </div>
+      )}
+
+      {locked && !isComingSoon && (
         <div className="absolute inset-0 z-10 flex items-center justify-center bg-background/80 backdrop-blur-sm">
           <div className="text-center">
             <p className="text-sm font-medium text-muted-foreground">🔒 Locked</p>
@@ -93,19 +106,29 @@ export function ModuleCard({ module, progress, locked = false }: ModuleCardProps
       </CardContent>
 
       <CardFooter>
-        <Link href={`/learn/${module.slug}`} className="w-full">
+        {isComingSoon ? (
           <Button
-            variant={progress?.started ? "secondary" : "default"}
+            variant="outline"
             className="w-full"
-            disabled={locked}
+            disabled
           >
-            {progress?.completed
-              ? "Review Module"
-              : progress?.started
-                ? "Continue Learning"
-                : "Start Module"}
+            Coming Soon
           </Button>
-        </Link>
+        ) : (
+          <Link href={`/learn/${module.slug}`} className="w-full">
+            <Button
+              variant={progress?.started ? "secondary" : "default"}
+              className="w-full"
+              disabled={locked}
+            >
+              {progress?.completed
+                ? "Review Module"
+                : progress?.started
+                  ? "Continue Learning"
+                  : "Start Module"}
+            </Button>
+          </Link>
+        )}
       </CardFooter>
     </Card>
   )

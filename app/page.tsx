@@ -1,13 +1,15 @@
+import { modules as oldModules } from "@/data/modules"
 import { getAllModules } from "@/lib/content"
 import type { Module } from "@/types"
 import { HomeClient } from "./home-client"
 
 export default function Home() {
-  // Only show MDX modules - old TypeScript modules are being phased out
+  // Get MDX modules
   const mdxModules = getAllModules()
+  const mdxModuleSlugs = new Set(mdxModules.map(m => m.metadata.slug))
 
   // Convert MDX modules to the Module type expected by the UI
-  const modules: Module[] = mdxModules.map(m => ({
+  const convertedMdxModules: Module[] = mdxModules.map(m => ({
     id: m.metadata.id,
     title: m.metadata.title,
     slug: m.metadata.slug,
@@ -33,8 +35,20 @@ export default function Home() {
       prerequisites: lesson.frontmatter.prerequisites,
       content: [] // Content is loaded separately for MDX
     })),
-    quiz: m.quiz
-  })).sort((a, b) => (a.order || 0) - (b.order || 0))
+    quiz: m.quiz,
+    isMigrated: true // Mark as fully migrated to MDX
+  }))
+
+  // Include old modules that don't have MDX versions yet (for "Coming Soon" display)
+  const filteredOldModules = oldModules
+    .filter(m => !mdxModuleSlugs.has(m.slug))
+    .map(m => ({
+      ...m,
+      isMigrated: false // Mark as not yet migrated
+    }))
+
+  // Combine and sort by order
+  const modules = [...convertedMdxModules, ...filteredOldModules].sort((a, b) => (a.order || 0) - (b.order || 0))
 
   return <HomeClient modules={modules} />
 }

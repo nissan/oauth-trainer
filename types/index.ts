@@ -64,6 +64,7 @@ export interface Module {
   prerequisites?: string[] // module IDs
   badge: Badge
   learningObjectives?: string[] // optional for old module structure
+  isMigrated?: boolean // indicates if module has been migrated to MDX format
 }
 
 export interface Badge {
