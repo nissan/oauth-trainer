@@ -11,6 +11,8 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
 import { ChevronDown, ChevronUp, Save, CheckCircle } from "lucide-react"
+import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
 
 interface CaseStudyResponseProps {
   lessonId: string
@@ -140,10 +142,10 @@ export function CaseStudyResponse({
           </CardHeader>
           <CollapsibleContent>
             <CardContent className="space-y-4">
-              <div className="prose prose-sm dark:prose-invert max-w-none">
-                <div className="whitespace-pre-wrap rounded-lg bg-muted p-4">
+              <div className="prose prose-sm dark:prose-invert max-w-none rounded-lg bg-muted p-4">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
                   {sampleResponse}
-                </div>
+                </ReactMarkdown>
               </div>
 
               {/* Related Concepts */}
