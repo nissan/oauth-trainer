@@ -44,43 +44,43 @@ async function getMDXComponent(moduleSlug: string, lessonSlug: string) {
 
   // Module 10: Applied Case Study
   if (moduleSlug === "10-applied-case-study") {
-    if (lessonSlug === "executive-analysis") {
+    if (lessonSlug === "01-executive-analysis") {
       const { default: Component } = await import(
         "@/content/modules/10-applied-case-study/lessons/01-executive-analysis.mdx"
       );
       return Component;
     }
-    if (lessonSlug === "command-control-platform") {
+    if (lessonSlug === "02-command-control-platform") {
       const { default: Component } = await import(
         "@/content/modules/10-applied-case-study/lessons/02-command-control-platform.mdx"
       );
       return Component;
     }
-    if (lessonSlug === "cloud-telemetry-ai") {
+    if (lessonSlug === "03-cloud-telemetry-ai") {
       const { default: Component } = await import(
         "@/content/modules/10-applied-case-study/lessons/03-cloud-telemetry-ai.mdx"
       );
       return Component;
     }
-    if (lessonSlug === "field-units-offline") {
+    if (lessonSlug === "04-field-units-offline") {
       const { default: Component } = await import(
         "@/content/modules/10-applied-case-study/lessons/04-field-units-offline.mdx"
       );
       return Component;
     }
-    if (lessonSlug === "api-analytics-portal") {
+    if (lessonSlug === "05-api-analytics-portal") {
       const { default: Component } = await import(
         "@/content/modules/10-applied-case-study/lessons/05-api-analytics-portal.mdx"
       );
       return Component;
     }
-    if (lessonSlug === "partner-federation") {
+    if (lessonSlug === "06-partner-federation") {
       const { default: Component } = await import(
         "@/content/modules/10-applied-case-study/lessons/06-partner-federation.mdx"
       );
       return Component;
     }
-    if (lessonSlug === "future-architecture") {
+    if (lessonSlug === "07-future-architecture") {
       const { default: Component } = await import(
         "@/content/modules/10-applied-case-study/lessons/07-future-architecture.mdx"
       );
