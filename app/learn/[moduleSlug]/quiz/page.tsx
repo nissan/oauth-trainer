@@ -129,7 +129,7 @@ export default function QuizPage({ params }: { params: Promise<{ moduleSlug: str
 
     // Award badge if passed
     if (finalScore >= PASSING_SCORE && module.badge) {
-      awardBadge(module.badge.id)
+      awardBadge(module.id, module.badge.id)
     }
 
     // Refresh progress
