@@ -10,7 +10,6 @@ import {
 } from "@/lib/content";
 import { getLessonBySlug } from "@/data/modules";
 import { LessonClient } from "./lesson-client";
-import { LessonClientOld } from "./lesson-client-old";
 import { notFound } from "next/navigation";
 import { MDXContent } from "./mdx-content";
 
