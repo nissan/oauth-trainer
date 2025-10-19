@@ -62,7 +62,7 @@ export function LessonClient({
   }
 
   const lessonProgress =
-    userProgress?.moduleProgress[lessonId]?.lessonProgress[lessonId];
+    userProgress?.moduleProgress[moduleSlug]?.lessonProgress[lessonId];
   const isCompleted = lessonProgress?.completed || false;
 
   const handleCompleteLesson = () => {
