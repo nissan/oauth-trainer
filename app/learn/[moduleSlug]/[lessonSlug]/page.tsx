@@ -125,10 +125,6 @@ export default async function LessonPage({ params }: PageProps) {
     );
   }
 
-  // Fallback to old client-side rendering for non-MDX lessons
-  if (oldLesson) {
-    return <LessonClientOld />;
-  }
-
+  // No lesson found
   return notFound();
 }
