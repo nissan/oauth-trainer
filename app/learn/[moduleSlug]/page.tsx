@@ -127,12 +127,6 @@ export default async function ModulePage({ params }: PageProps) {
     );
   }
 
-  // Fallback: Use old client component for non-MDX modules
-  if (oldModule) {
-    // Import the old component dynamically
-    const ModulePageOld = (await import("./module-page-old")).default;
-    return <ModulePageOld />;
-  }
-
+  // No module found
   return notFound();
 }
