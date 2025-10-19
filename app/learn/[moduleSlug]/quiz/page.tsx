@@ -115,7 +115,17 @@ export default function QuizPage({ params }: { params: Promise<{ moduleSlug: str
     setQuizCompleted(true)
 
     // Record quiz attempt
-    recordQuizAttempt(module.id, finalScore, totalQuestions)
+    recordQuizAttempt(module.id, {
+      quizId: module.id,
+      score: finalScore,
+      correctAnswers: correctCount,
+      totalQuestions,
+      answers: selectedAnswers.reduce((acc, answer, idx) => {
+        acc[questions[idx].id] = answer
+        return acc
+      }, {} as Record<string, number>),
+      passed: finalScore >= PASSING_SCORE,
+    })
 
     // Award badge if passed
     if (finalScore >= PASSING_SCORE && module.badge) {
