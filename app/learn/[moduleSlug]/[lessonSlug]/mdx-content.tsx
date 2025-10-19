@@ -8,6 +8,40 @@ interface MDXContentProps {
 // Mapping of module and lesson slugs to MDX imports
 // This is required because Turbopack needs static import paths
 async function getMDXComponent(moduleSlug: string, lessonSlug: string) {
+  // Module 00: Executive Overview
+  if (moduleSlug === "00-executive-overview") {
+    if (lessonSlug === "01-identity-landscape") {
+      const { default: Component } = await import(
+        "@/content/modules/00-executive-overview/lessons/01-identity-landscape.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "02-authentication-authorization-summary") {
+      const { default: Component } = await import(
+        "@/content/modules/00-executive-overview/lessons/02-authentication-authorization-summary.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "03-enterprise-passwordless-summary") {
+      const { default: Component } = await import(
+        "@/content/modules/00-executive-overview/lessons/03-enterprise-passwordless-summary.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "04-authorization-zero-trust-summary") {
+      const { default: Component } = await import(
+        "@/content/modules/00-executive-overview/lessons/04-authorization-zero-trust-summary.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "05-decentralized-identity-summary") {
+      const { default: Component } = await import(
+        "@/content/modules/00-executive-overview/lessons/05-decentralized-identity-summary.mdx"
+      );
+      return Component;
+    }
+  }
+
   // Module 01: Auth Fundamentals
   if (moduleSlug === "01-auth-fundamentals") {
     if (lessonSlug === "01-auth-vs-authz") {
