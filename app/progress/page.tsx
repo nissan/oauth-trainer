@@ -226,7 +226,7 @@ export default function ProgressPage() {
                         <div>
                           <span className="text-muted-foreground">Time Spent: </span>
                           <span className="font-medium">
-                            {Math.round(moduleProgress.totalTimeSpent ?? 0)} min
+                            {Math.round(moduleProgress?.totalTimeSpent ?? 0)} min
                           </span>
                         </div>
                       )}
