@@ -22,8 +22,8 @@ export interface Lesson {
   description: string
   duration: number // in minutes
   order: number
-  content: LessonContent[]
-  keyTakeaways: string[]
+  content?: LessonContent[] // optional for MDX lessons
+  keyTakeaways?: string[] // optional for MDX lessons
   prerequisites?: string[] // lesson IDs
 }
 
