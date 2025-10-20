@@ -178,6 +178,34 @@ async function getMDXComponent(moduleSlug: string, lessonSlug: string) {
     }
   }
 
+  // Module 06: Zanzibar & Fine-Grained Authorization
+  if (moduleSlug === "06-zanzibar") {
+    if (lessonSlug === "01-authorization-fundamentals") {
+      const { default: Component } = await import(
+        "@/content/modules/06-zanzibar/lessons/01-authorization-fundamentals.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "02-google-zanzibar") {
+      const { default: Component } = await import(
+        "@/content/modules/06-zanzibar/lessons/02-google-zanzibar.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "03-implementing-zanzibar") {
+      const { default: Component } = await import(
+        "@/content/modules/06-zanzibar/lessons/03-implementing-zanzibar.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "04-authorization-systems-comparison") {
+      const { default: Component } = await import(
+        "@/content/modules/06-zanzibar/lessons/04-authorization-systems-comparison.mdx"
+      );
+      return Component;
+    }
+  }
+
   // Module 01: Auth Fundamentals
   if (moduleSlug === "01-auth-fundamentals") {
     if (lessonSlug === "01-auth-vs-authz") {
