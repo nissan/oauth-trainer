@@ -156,6 +156,28 @@ async function getMDXComponent(moduleSlug: string, lessonSlug: string) {
     }
   }
 
+  // Module 05: FIDO2 & WebAuthn
+  if (moduleSlug === "05-fido2") {
+    if (lessonSlug === "01-fido2-fundamentals") {
+      const { default: Component } = await import(
+        "@/content/modules/05-fido2/lessons/01-fido2-fundamentals.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "02-webauthn-api") {
+      const { default: Component } = await import(
+        "@/content/modules/05-fido2/lessons/02-webauthn-api.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "03-passkeys-implementation") {
+      const { default: Component } = await import(
+        "@/content/modules/05-fido2/lessons/03-passkeys-implementation.mdx"
+      );
+      return Component;
+    }
+  }
+
   // Module 01: Auth Fundamentals
   if (moduleSlug === "01-auth-fundamentals") {
     if (lessonSlug === "01-auth-vs-authz") {

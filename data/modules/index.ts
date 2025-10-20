@@ -12,7 +12,8 @@ import { executiveOverviewModule } from "./00-executive-overview"
 // import { oidcModule } from "./03-oidc"
 // Module 04 now uses MDX content from content/modules/04-saml/
 // import { samlModule } from "./04-saml"
-import { fido2Module } from "./05-fido2"
+// Module 05 now uses MDX content from content/modules/05-fido2/
+// import { fido2Module } from "./05-fido2"
 import { zanzibarModule } from "./06-zanzibar"
 import { emergingTrendsModule } from "./07-emerging-trends"
 import { ssiDecentralizedIdentityModule } from "./08-ssi-decentralized-identity"
@@ -25,7 +26,7 @@ export const modules: Module[] = [
   // oauth2Module, // Now uses MDX from content/modules/02-oauth2/
   // oidcModule, // Now uses MDX from content/modules/03-oidc/
   // samlModule, // Now uses MDX from content/modules/04-saml/
-  fido2Module,
+  // fido2Module, // Now uses MDX from content/modules/05-fido2/
   zanzibarModule,
   emergingTrendsModule,
   ssiDecentralizedIdentityModule,
