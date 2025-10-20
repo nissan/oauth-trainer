@@ -8,7 +8,8 @@ import { executiveOverviewModule } from "./00-executive-overview"
 // import { authFundamentalsModule } from "./01-auth-fundamentals"
 // Module 02 now uses MDX content from content/modules/02-oauth2/
 // import { oauth2Module } from "./02-oauth2"
-import { oidcModule } from "./03-oidc"
+// Module 03 now uses MDX content from content/modules/03-oidc/
+// import { oidcModule } from "./03-oidc"
 import { samlModule } from "./04-saml"
 import { fido2Module } from "./05-fido2"
 import { zanzibarModule } from "./06-zanzibar"
@@ -21,7 +22,7 @@ export const modules: Module[] = [
   executiveOverviewModule,
   // authFundamentalsModule, // Now uses MDX from content/modules/01-auth-fundamentals/
   // oauth2Module, // Now uses MDX from content/modules/02-oauth2/
-  oidcModule,
+  // oidcModule, // Now uses MDX from content/modules/03-oidc/
   samlModule,
   fido2Module,
   zanzibarModule,

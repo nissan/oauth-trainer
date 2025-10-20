@@ -82,6 +82,46 @@ async function getMDXComponent(moduleSlug: string, lessonSlug: string) {
     }
   }
 
+  // Module 03: OpenID Connect (OIDC)
+  if (moduleSlug === "03-oidc") {
+    if (lessonSlug === "01-oidc-fundamentals") {
+      const { default: Component } = await import(
+        "@/content/modules/03-oidc/lessons/01-oidc-fundamentals.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "02-id-tokens-jwt") {
+      const { default: Component } = await import(
+        "@/content/modules/03-oidc/lessons/02-id-tokens-jwt.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "03-userinfo-endpoint") {
+      const { default: Component } = await import(
+        "@/content/modules/03-oidc/lessons/03-userinfo-endpoint.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "04-oidc-flows") {
+      const { default: Component } = await import(
+        "@/content/modules/03-oidc/lessons/04-oidc-flows.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "05-discovery-dynamic-config") {
+      const { default: Component } = await import(
+        "@/content/modules/03-oidc/lessons/05-discovery-dynamic-config.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "06-oidc-session-management") {
+      const { default: Component } = await import(
+        "@/content/modules/03-oidc/lessons/06-oidc-session-management.mdx"
+      );
+      return Component;
+    }
+  }
+
   // Module 01: Auth Fundamentals
   if (moduleSlug === "01-auth-fundamentals") {
     if (lessonSlug === "01-auth-vs-authz") {
