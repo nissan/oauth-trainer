@@ -42,6 +42,46 @@ async function getMDXComponent(moduleSlug: string, lessonSlug: string) {
     }
   }
 
+  // Module 02: OAuth 2.0
+  if (moduleSlug === "02-oauth2") {
+    if (lessonSlug === "01-oauth-roles") {
+      const { default: Component } = await import(
+        "@/content/modules/02-oauth2/lessons/01-oauth-roles.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "02-authorization-code-flow") {
+      const { default: Component } = await import(
+        "@/content/modules/02-oauth2/lessons/02-authorization-code-flow.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "03-client-credentials") {
+      const { default: Component } = await import(
+        "@/content/modules/02-oauth2/lessons/03-client-credentials.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "04-device-code-flow") {
+      const { default: Component } = await import(
+        "@/content/modules/02-oauth2/lessons/04-device-code-flow.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "05-token-lifecycle") {
+      const { default: Component } = await import(
+        "@/content/modules/02-oauth2/lessons/05-token-lifecycle.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "06-oauth-security") {
+      const { default: Component } = await import(
+        "@/content/modules/02-oauth2/lessons/06-oauth-security.mdx"
+      );
+      return Component;
+    }
+  }
+
   // Module 01: Auth Fundamentals
   if (moduleSlug === "01-auth-fundamentals") {
     if (lessonSlug === "01-auth-vs-authz") {
