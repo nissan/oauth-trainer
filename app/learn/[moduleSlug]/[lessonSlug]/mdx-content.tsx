@@ -122,6 +122,40 @@ async function getMDXComponent(moduleSlug: string, lessonSlug: string) {
     }
   }
 
+  // Module 04: SAML 2.0
+  if (moduleSlug === "04-saml") {
+    if (lessonSlug === "01-saml-fundamentals") {
+      const { default: Component } = await import(
+        "@/content/modules/04-saml/lessons/01-saml-fundamentals.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "02-saml-assertions") {
+      const { default: Component } = await import(
+        "@/content/modules/04-saml/lessons/02-saml-assertions.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "03-saml-bindings-profiles") {
+      const { default: Component } = await import(
+        "@/content/modules/04-saml/lessons/03-saml-bindings-profiles.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "04-saml-vs-oidc") {
+      const { default: Component } = await import(
+        "@/content/modules/04-saml/lessons/04-saml-vs-oidc.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "05-saml-security-best-practices") {
+      const { default: Component } = await import(
+        "@/content/modules/04-saml/lessons/05-saml-security-best-practices.mdx"
+      );
+      return Component;
+    }
+  }
+
   // Module 01: Auth Fundamentals
   if (moduleSlug === "01-auth-fundamentals") {
     if (lessonSlug === "01-auth-vs-authz") {
