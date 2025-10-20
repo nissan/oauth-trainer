@@ -206,6 +206,28 @@ async function getMDXComponent(moduleSlug: string, lessonSlug: string) {
     }
   }
 
+  // Module 07: Emerging IAM Trends
+  if (moduleSlug === "07-emerging-trends" || moduleSlug === "emerging-trends") {
+    if (lessonSlug === "01-decentralized-identity" || lessonSlug === "decentralized-identity") {
+      const { default: Component } = await import(
+        "@/content/modules/07-emerging-trends/lessons/01-decentralized-identity.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "02-continuous-access-evaluation" || lessonSlug === "continuous-access-evaluation") {
+      const { default: Component } = await import(
+        "@/content/modules/07-emerging-trends/lessons/02-continuous-access-evaluation.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "03-zero-trust-architecture" || lessonSlug === "zero-trust-architecture") {
+      const { default: Component } = await import(
+        "@/content/modules/07-emerging-trends/lessons/03-zero-trust-architecture.mdx"
+      );
+      return Component;
+    }
+  }
+
   // Module 01: Auth Fundamentals
   if (moduleSlug === "01-auth-fundamentals") {
     if (lessonSlug === "01-auth-vs-authz") {

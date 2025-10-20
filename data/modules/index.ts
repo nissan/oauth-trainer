@@ -16,7 +16,8 @@ import { executiveOverviewModule } from "./00-executive-overview"
 // import { fido2Module } from "./05-fido2"
 // Module 06 now uses MDX content from content/modules/06-zanzibar/
 // import { zanzibarModule } from "./06-zanzibar"
-import { emergingTrendsModule } from "./07-emerging-trends"
+// Module 07 now uses MDX content from content/modules/07-emerging-trends/
+// import { emergingTrendsModule } from "./07-emerging-trends"
 import { ssiDecentralizedIdentityModule } from "./08-ssi-decentralized-identity"
 import { appliedApplicationsModule } from "./09-applied-applications"
 import type { Module, CourseStructure } from "@/types"
@@ -29,7 +30,7 @@ export const modules: Module[] = [
   // samlModule, // Now uses MDX from content/modules/04-saml/
   // fido2Module, // Now uses MDX from content/modules/05-fido2/
   // zanzibarModule, // Now uses MDX from content/modules/06-zanzibar/
-  emergingTrendsModule,
+  // emergingTrendsModule, // Now uses MDX from content/modules/07-emerging-trends/
   ssiDecentralizedIdentityModule,
   appliedApplicationsModule,
 ]
