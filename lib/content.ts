@@ -223,17 +223,8 @@ export function getNextLesson(
     };
   }
 
-  // Check if there's a next module
-  if (currentModuleIndex < modules.length - 1) {
-    const nextModule = modules[currentModuleIndex + 1];
-    if (nextModule.lessons.length > 0) {
-      return {
-        moduleSlug: nextModule.metadata.slug,
-        lessonSlug: nextModule.lessons[0].slug,
-      };
-    }
-  }
-
+  // Return null when last lesson of module is reached
+  // This ensures users see the "Take Quiz" button instead of jumping to next module
   return null;
 }
 
