@@ -1,7 +1,7 @@
 {
   "id": "07-emerging-trends",
   "title": "Emerging IAM Trends",
-  "slug": "emerging-trends",
+  "slug": "07-emerging-trends",
   "description": "Explore the future of identity and access management with Decentralized Identity (DID), Verifiable Credentials, Continuous Access Evaluation (CAE), Zero Trust architecture, and emerging standards.",
   "difficulty": "advanced",
   "order": 7,
