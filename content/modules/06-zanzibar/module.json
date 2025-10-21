@@ -8,9 +8,11 @@
   "estimatedHours": 2.5,
   "prerequisiteModules": ["05-fido2"],
   "badge": {
+    "id": "badge-zanzibar",
     "name": "Authorization Expert",
     "icon": "🔐",
-    "description": "Mastered fine-grained authorization with Zanzibar and ReBAC"
+    "description": "Mastered fine-grained authorization with Zanzibar and ReBAC",
+    "color": "advanced"
   },
   "learningObjectives": [
     "Understand fine-grained authorization and its importance",
