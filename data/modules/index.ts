@@ -3,7 +3,8 @@
  * Central module registry
  */
 
-import { executiveOverviewModule } from "./00-executive-overview"
+// Module 00 now uses MDX content from content/modules/00-executive-overview/
+// import { executiveOverviewModule } from "./00-executive-overview"
 // Module 01 now uses MDX content from content/modules/01-auth-fundamentals/
 // import { authFundamentalsModule } from "./01-auth-fundamentals"
 // Module 02 now uses MDX content from content/modules/02-oauth2/
@@ -25,7 +26,7 @@ import { executiveOverviewModule } from "./00-executive-overview"
 import type { Module, CourseStructure } from "@/types"
 
 export const modules: Module[] = [
-  executiveOverviewModule,
+  // executiveOverviewModule, // Now uses MDX from content/modules/00-executive-overview/
   // authFundamentalsModule, // Now uses MDX from content/modules/01-auth-fundamentals/
   // oauth2Module, // Now uses MDX from content/modules/02-oauth2/
   // oidcModule, // Now uses MDX from content/modules/03-oidc/
