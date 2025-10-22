@@ -228,6 +228,34 @@ async function getMDXComponent(moduleSlug: string, lessonSlug: string) {
     }
   }
 
+  // Module 08: Self-Sovereign Identity & Decentralized Identity
+  if (moduleSlug === "08-ssi-decentralized-identity" || moduleSlug === "ssi-decentralized-identity") {
+    if (lessonSlug === "01-ssi-fundamentals" || lessonSlug === "ssi-fundamentals") {
+      const { default: Component } = await import(
+        "@/content/modules/08-ssi-decentralized-identity/lessons/01-ssi-fundamentals.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "02-dids-and-methods" || lessonSlug === "dids-and-methods") {
+      const { default: Component } = await import(
+        "@/content/modules/08-ssi-decentralized-identity/lessons/02-dids-and-methods.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "03-verifiable-credentials" || lessonSlug === "verifiable-credentials") {
+      const { default: Component } = await import(
+        "@/content/modules/08-ssi-decentralized-identity/lessons/03-verifiable-credentials.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "04-digital-wallets-ecosystem" || lessonSlug === "digital-wallets-ecosystem") {
+      const { default: Component } = await import(
+        "@/content/modules/08-ssi-decentralized-identity/lessons/04-digital-wallets-ecosystem.mdx"
+      );
+      return Component;
+    }
+  }
+
   // Module 01: Auth Fundamentals
   if (moduleSlug === "01-auth-fundamentals") {
     if (lessonSlug === "01-auth-vs-authz") {
