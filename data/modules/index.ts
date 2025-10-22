@@ -20,7 +20,8 @@ import { executiveOverviewModule } from "./00-executive-overview"
 // import { emergingTrendsModule } from "./07-emerging-trends"
 // Module 08 now uses MDX content from content/modules/08-ssi-decentralized-identity/
 // import { ssiDecentralizedIdentityModule } from "./08-ssi-decentralized-identity"
-import { appliedApplicationsModule } from "./09-applied-applications"
+// Module 09 now uses MDX content from content/modules/09-applied-applications/
+// import { appliedApplicationsModule } from "./09-applied-applications"
 import type { Module, CourseStructure } from "@/types"
 
 export const modules: Module[] = [
@@ -33,7 +34,7 @@ export const modules: Module[] = [
   // zanzibarModule, // Now uses MDX from content/modules/06-zanzibar/
   // emergingTrendsModule, // Now uses MDX from content/modules/07-emerging-trends/
   // ssiDecentralizedIdentityModule, // Now uses MDX from content/modules/08-ssi-decentralized-identity/
-  appliedApplicationsModule,
+  // appliedApplicationsModule, // Now uses MDX from content/modules/09-applied-applications/
 ]
 
 export function getCourseStructure(): CourseStructure {

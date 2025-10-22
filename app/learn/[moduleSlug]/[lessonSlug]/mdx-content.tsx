@@ -256,6 +256,28 @@ async function getMDXComponent(moduleSlug: string, lessonSlug: string) {
     }
   }
 
+  // Module 09: Applied Applications - Real-World Case Studies
+  if (moduleSlug === "09-applied-applications" || moduleSlug === "applied-applications") {
+    if (lessonSlug === "01-supabase-auth-case-study" || lessonSlug === "supabase-auth-case-study") {
+      const { default: Component } = await import(
+        "@/content/modules/09-applied-applications/lessons/01-supabase-auth-case-study.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "02-privy-embedded-wallets" || lessonSlug === "privy-embedded-wallets") {
+      const { default: Component } = await import(
+        "@/content/modules/09-applied-applications/lessons/02-privy-embedded-wallets.mdx"
+      );
+      return Component;
+    }
+    if (lessonSlug === "03-lazorkit-solana-passkeys" || lessonSlug === "lazorkit-solana-passkeys") {
+      const { default: Component } = await import(
+        "@/content/modules/09-applied-applications/lessons/03-lazorkit-solana-passkeys.mdx"
+      );
+      return Component;
+    }
+  }
+
   // Module 01: Auth Fundamentals
   if (moduleSlug === "01-auth-fundamentals") {
     if (lessonSlug === "01-auth-vs-authz") {
