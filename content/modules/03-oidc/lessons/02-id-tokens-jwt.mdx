@@ -2,6 +2,12 @@
 title: "ID Tokens: Structure, Claims, and Validation"
 slug: "02-id-tokens-jwt"
 duration: 30
+keyTakeaways:
+  - "ID Tokens are JWTs with three parts: header (algorithm), payload (claims), signature (verification)"
+  - "Standard claims: iss (issuer), sub (subject/user ID), aud (audience), exp (expiration), iat (issued at)"
+  - "JWT signature verification using RS256 (asymmetric) or HS256 (symmetric) ensures token integrity"
+  - "Always validate: signature, issuer, audience, expiration - never trust unverified tokens"
+  - "ID Token claims provide user identity information without additional API calls"
 ---
 
 ## What is an ID Token?

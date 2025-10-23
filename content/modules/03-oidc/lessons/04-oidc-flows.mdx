@@ -2,6 +2,12 @@
 title: "OIDC Flows: Authorization Code, Implicit, and Hybrid"
 slug: "04-oidc-flows"
 duration: 30
+keyTakeaways:
+  - "Authorization Code Flow: Most secure, uses backend token exchange with client secret"
+  - "Implicit Flow: Deprecated, returns tokens in URL fragment - use Code + PKCE instead"
+  - "Hybrid Flow: Combines features of Code and Implicit for complex scenarios"
+  - "Response types: code (auth code), id_token (ID Token), token (access token)"
+  - "Flow selection based on client type: confidential (Code Flow) vs public (Code + PKCE)"
 ---
 
 ## OIDC Flow Overview

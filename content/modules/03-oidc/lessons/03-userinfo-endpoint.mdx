@@ -2,6 +2,12 @@
 title: "UserInfo Endpoint: Retrieving User Claims"
 slug: "03-userinfo-endpoint"
 duration: 20
+keyTakeaways:
+  - "UserInfo endpoint provides additional user claims beyond what's in the ID Token"
+  - "Access token with openid scope required to call /userinfo endpoint"
+  - "UserInfo returns JSON claims: email, name, picture, phone_number, address, etc."
+  - "Use UserInfo for fresh data or when ID Token size limits are a concern"
+  - "Always validate UserInfo response matches ID Token sub claim for security"
 ---
 
 ## What is the UserInfo Endpoint?

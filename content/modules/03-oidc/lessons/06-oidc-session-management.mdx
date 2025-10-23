@@ -2,6 +2,12 @@
 title: "Session Management and Single Logout"
 slug: "06-oidc-session-management"
 duration: 25
+keyTakeaways:
+  - "Session management tracks user authentication state across multiple requests"
+  - "Front-channel logout: Browser redirects to IdP logout endpoint, then to all RPs"
+  - "Back-channel logout: IdP sends server-to-server logout notifications via HTTP POST"
+  - "Refresh tokens allow obtaining new access/ID tokens without re-authentication"
+  - "Session monitoring via session_state parameter and OP iframe for real-time session status"
 ---
 
 ## OIDC Session Management Overview
