@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
+import posthog from 'posthog-js'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
@@ -67,12 +68,31 @@ export function HomeClient({ modules }: HomeClientProps) {
 
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link href="/learn">
-              <Button size="lg" className="text-lg">
+              <Button
+                size="lg"
+                className="text-lg"
+                onClick={() => {
+                  posthog.capture('learning_cta_clicked', {
+                    cta_text: hasStarted ? "Continue Learning" : "Start Learning",
+                    location: 'hero'
+                  })
+                }}
+              >
                 {hasStarted ? "Continue Learning" : "Start Learning"}
               </Button>
             </Link>
             <Link href="/progress">
-              <Button size="lg" variant="outline" className="text-lg">
+              <Button
+                size="lg"
+                variant="outline"
+                className="text-lg"
+                onClick={() => {
+                  posthog.capture('progress_cta_clicked', {
+                    cta_text: hasStarted ? "View Progress" : "Learn More",
+                    location: 'hero'
+                  })
+                }}
+              >
                 {hasStarted ? "View Progress" : "Learn More"}
               </Button>
             </Link>
@@ -210,7 +230,16 @@ export function HomeClient({ modules }: HomeClientProps) {
             Start your journey today and master the skills that power secure modern applications
           </p>
           <Link href="/learn">
-            <Button size="lg" className="text-lg">
+            <Button
+              size="lg"
+              className="text-lg"
+              onClick={() => {
+                posthog.capture('learning_cta_clicked', {
+                  cta_text: 'Begin Your Journey',
+                  location: 'footer_cta'
+                })
+              }}
+            >
               Begin Your Journey
             </Button>
           </Link>

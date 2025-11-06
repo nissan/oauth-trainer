@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
+import posthog from "posthog-js"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -37,6 +38,11 @@ export default function ProgressPage() {
 
   const handleReset = () => {
     if (showResetConfirm) {
+      posthog.capture("progress-reset-confirmed", {
+        completed_modules: stats.completedModules,
+        completed_lessons: stats.completedLessons,
+        total_time_spent_minutes: Math.round(stats.totalTimeSpent),
+      })
       resetProgress()
       const progress = getUserProgress()
       setUserProgress(progress)
@@ -265,6 +271,7 @@ export default function ProgressPage() {
             <Button
               variant="outline"
               onClick={() => {
+                posthog.capture("progress-exported")
                 const progress = getUserProgress()
                 const dataStr = JSON.stringify(progress, null, 2)
                 const dataUri =

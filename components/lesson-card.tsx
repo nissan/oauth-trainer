@@ -1,5 +1,6 @@
 "use client"
 
+import posthog from 'posthog-js'
 import Link from "next/link"
 import type { Lesson, LessonProgress } from "@/types"
 import {
@@ -22,6 +23,15 @@ export function LessonCard({ lesson, progress, moduleSlug }: LessonCardProps) {
   return (
     <Link href={`/learn/${moduleSlug}/${lesson.slug}`}>
       <Card
+        onClick={() => {
+          posthog.capture("lesson_card_clicked", {
+            lesson_slug: lesson.slug,
+            lesson_title: lesson.title,
+            lesson_order: lesson.order,
+            module_slug: moduleSlug,
+            is_completed: isCompleted,
+          })
+        }}
         className={`group cursor-pointer transition-all hover:shadow-md ${
           isCompleted ? "border-success/50 bg-success/5" : ""
         }`}

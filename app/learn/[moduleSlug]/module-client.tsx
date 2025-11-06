@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import posthog from 'posthog-js';
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -192,7 +193,25 @@ export function ModuleClient({
 
           {nextLessonSlug && (
             <Link href={`/learn/${moduleSlug}/${nextLessonSlug}`}>
-              <Button className="w-full" size="lg">
+              <Button
+                className="w-full"
+                size="lg"
+                onClick={() => {
+                  const ctaText =
+                    completedLessons === 0
+                      ? "Start First Lesson"
+                      : completedLessons === totalLessons
+                        ? "Review Lessons"
+                        : "Continue Learning";
+                  posthog.capture("learning_module_cta_clicked", {
+                    module_slug: moduleSlug,
+                    module_title: metadata.title,
+                    cta_text: ctaText,
+                    progress_percent: progressPercent,
+                    next_lesson_slug: nextLessonSlug,
+                  });
+                }}
+              >
                 {completedLessons === 0
                   ? "Start First Lesson"
                   : completedLessons === totalLessons
@@ -287,6 +306,17 @@ export function ModuleClient({
               <Button
                 variant={moduleProgress?.completed ? "secondary" : "default"}
                 className="w-full"
+                onClick={() => {
+                  const ctaText = moduleProgress?.completed
+                    ? "Retake Quiz"
+                    : "Take Quiz";
+                  posthog.capture("module_quiz_cta_clicked", {
+                    module_slug: moduleSlug,
+                    module_title: metadata.title,
+                    cta_text: ctaText,
+                    quiz_question_count: quiz.questions.length,
+                  });
+                }}
               >
                 {moduleProgress?.completed ? "Retake Quiz" : "Take Quiz"}
               </Button>

@@ -12,6 +12,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { getAllCaseStudyResponses } from "@/lib/storage";
 import { Download, Share2, Twitter } from "lucide-react";
+import posthog from 'posthog-js';
 
 interface Lesson {
   id: string;
@@ -52,6 +53,13 @@ export function SummaryClient({
   const totalLessons = lessons.length;
 
   const handleDownloadPDF = async () => {
+    posthog.capture('case-study-summary-downloaded', {
+      moduleSlug,
+      moduleId,
+      moduleTitle,
+      completedLessons: completedCount,
+      totalLessons,
+    });
     setIsGeneratingPDF(true);
     try {
       // Dynamic import of jsPDF to reduce bundle size
@@ -123,6 +131,13 @@ export function SummaryClient({
   };
 
   const handleShareTwitter = () => {
+    posthog.capture('case-study-summary-shared', {
+      platform: 'twitter',
+      moduleSlug,
+      moduleId,
+      moduleTitle,
+      completedLessons: completedCount,
+    });
     const text = `Just completed the Applied IAM Case Study: ${moduleTitle}! 🔐 ${completedCount}/${totalLessons} lessons analyzed. #reddilearner`;
     const url = encodeURIComponent(window.location.origin + `/learn/${moduleSlug}`);
     window.open(
@@ -132,6 +147,13 @@ export function SummaryClient({
   };
 
   const handleShareLinkedIn = () => {
+    posthog.capture('case-study-summary-shared', {
+      platform: 'linkedin',
+      moduleSlug,
+      moduleId,
+      moduleTitle,
+      completedLessons: completedCount,
+    });
     const url = encodeURIComponent(window.location.origin + `/learn/${moduleSlug}`);
     window.open(
       `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,

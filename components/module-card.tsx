@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import type { Module, ModuleProgress } from "@/types"
+import posthog from "posthog-js"
 import {
   Card,
   CardContent,
@@ -37,6 +38,22 @@ export function ModuleCard({ module, progress, locked = false }: ModuleCardProps
   } as const
 
   const difficultyVariant = difficultyColors[module.difficulty]
+
+  const handleCtaClick = () => {
+    let actionType = "Start Module"
+    if (progress?.completed) {
+      actionType = "Review Module"
+    } else if (progress?.started) {
+      actionType = "Continue Learning"
+    }
+
+    posthog.capture("module-card-cta-clicked", {
+      module_slug: module.slug,
+      module_title: module.title,
+      action_type: actionType,
+      locked: locked,
+    })
+  }
 
   return (
     <Card className="group relative overflow-hidden transition-all hover:shadow-lg">
@@ -120,6 +137,7 @@ export function ModuleCard({ module, progress, locked = false }: ModuleCardProps
               variant={progress?.started ? "secondary" : "default"}
               className="w-full"
               disabled={locked}
+              onClick={handleCtaClick}
             >
               {progress?.completed
                 ? "Review Module"

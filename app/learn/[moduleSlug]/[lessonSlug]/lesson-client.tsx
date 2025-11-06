@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import posthog from 'posthog-js';
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -67,12 +68,28 @@ export function LessonClient({
 
   const handleCompleteLesson = () => {
     const timeSpent = Math.round((Date.now() - lessonStartTime) / 1000 / 60); // minutes
+    posthog.capture('lesson_marked_complete', {
+        moduleSlug,
+        lessonSlug,
+        lessonId,
+        title,
+        time_spent_minutes: timeSpent,
+    });
     completeLesson(moduleSlug, lessonId, timeSpent);
     const updatedProgress = getUserProgress();
     setUserProgress(updatedProgress);
   };
 
   const handleNext = () => {
+    if (nextLesson) {
+        posthog.capture('lesson_navigation', {
+            direction: 'next',
+            moduleSlug,
+            lessonSlug,
+            next_module_slug: nextLesson.moduleSlug,
+            next_lesson_slug: nextLesson.lessonSlug,
+        });
+    }
     if (!isCompleted) {
       handleCompleteLesson();
     }
@@ -137,6 +154,15 @@ export function LessonClient({
           {previousLesson && (
             <Link
               href={`/learn/${previousLesson.moduleSlug}/${previousLesson.lessonSlug}`}
+              onClick={() => {
+                posthog.capture('lesson_navigation', {
+                    direction: 'previous',
+                    moduleSlug,
+                    lessonSlug,
+                    previous_module_slug: previousLesson.moduleSlug,
+                    previous_lesson_slug: previousLesson.lessonSlug,
+                });
+              }}
             >
               <Button variant="outline">
                 ← Previous Lesson
@@ -157,7 +183,13 @@ export function LessonClient({
               Next Lesson →
             </Button>
           ) : (
-            <Link href={`/learn/${moduleSlug}/quiz`}>
+            <Link href={`/learn/${moduleSlug}/quiz`} onClick={() => {
+                posthog.capture('lesson_navigation', {
+                    direction: 'quiz',
+                    moduleSlug,
+                    lessonSlug,
+                });
+            }}>
               <Button>Take Module Quiz →</Button>
             </Link>
           )}

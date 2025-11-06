@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
+import posthog from 'posthog-js'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -112,6 +113,17 @@ export default function QuizPage({ params }: { params: Promise<{ moduleSlug: str
     })
 
     const finalScore = Math.round((correctCount / totalQuestions) * 100)
+    const passed = finalScore >= PASSING_SCORE
+
+    posthog.capture('quiz_completed', {
+      module_id: module.id,
+      module_slug: moduleSlug,
+      score: finalScore,
+      passed: passed,
+      correct_answers: correctCount,
+      total_questions: totalQuestions,
+    })
+
     setScore(finalScore)
     setQuizCompleted(true)
 
@@ -126,11 +138,11 @@ export default function QuizPage({ params }: { params: Promise<{ moduleSlug: str
         acc[questionId] = answer
         return acc
       }, {} as Record<string, number>),
-      passed: finalScore >= PASSING_SCORE,
+      passed: passed,
     })
 
     // Award badge if passed
-    if (finalScore >= PASSING_SCORE && module.badge) {
+    if (passed && module.badge) {
       awardBadge(module.id, module.badge.id)
     }
 
@@ -140,6 +152,11 @@ export default function QuizPage({ params }: { params: Promise<{ moduleSlug: str
 
   // Handle retry
   const handleRetry = () => {
+    posthog.capture('quiz_retried', {
+      module_id: module.id,
+      module_slug: moduleSlug,
+      previous_score: score,
+    })
     setCurrentQuestionIndex(0)
     setSelectedAnswers([])
     setQuizCompleted(false)

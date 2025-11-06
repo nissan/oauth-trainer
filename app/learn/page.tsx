@@ -1,3 +1,4 @@
+import posthog from 'posthog-js'
 import { modules as oldModules } from "@/data/modules"
 import { getAllModules } from "@/lib/content"
 import type { Module } from "@/types"
@@ -91,7 +92,7 @@ export default function LearnPage() {
               )}
               <div className="flex flex-col gap-2">
                 <Link href={`/learn/${module.slug}`}>
-                  <Button className="w-full">View Module</Button>
+                  <Button className="w-full" onClick={() => posthog.capture('learning-module-clicked', { module_id: module.id, module_slug: module.slug, module_title: module.title, module_difficulty: module.difficulty })}>View Module</Button>
                 </Link>
                 <div className="text-center text-sm text-muted-foreground">
                   {module.lessons.length} lessons
