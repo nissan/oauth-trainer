@@ -21,5 +21,7 @@
     "description": "Mastered real-world authentication implementations and can evaluate and apply IAM solutions in production contexts",
     "icon": "🛠️",
     "color": "advanced"
-  }
+  },
+  "requiresPassword": true,
+  "password": "NoAccess2025"
 }

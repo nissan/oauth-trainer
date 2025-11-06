@@ -20,5 +20,7 @@
     "description": "Expert in OAuth flows, PKCE, token management, and security best practices",
     "icon": "🔑",
     "color": "beginner"
-  }
+  },
+  "requiresPassword": true,
+  "password": "NoAccess2025"
 }

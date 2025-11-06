@@ -19,5 +19,7 @@
     "Master registration and authentication ceremonies",
     "Understand attestation and credential backup",
     "Build phishing-resistant authentication flows"
-  ]
+  ],
+  "requiresPassword": true,
+  "password": "NoAccess2025"
 }

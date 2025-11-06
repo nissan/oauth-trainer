@@ -19,5 +19,7 @@
     "Implement SAML-based enterprise SSO",
     "Understand SAML security considerations and vulnerabilities",
     "Compare SAML with OAuth 2.0 and OpenID Connect"
-  ]
+  ],
+  "requiresPassword": true,
+  "password": "NoAccess2025"
 }

@@ -22,5 +22,7 @@
     "description": "Mastered Self-Sovereign Identity, DIDs, Verifiable Credentials, and decentralized identity systems",
     "icon": "🆔",
     "color": "advanced"
-  }
+  },
+  "requiresPassword": true,
+  "password": "NoAccess2025"
 }

@@ -21,5 +21,7 @@
     "description": "Mastered emerging trends in identity and access management including DID, Verifiable Credentials, CAE, and Zero Trust",
     "icon": "🚀",
     "color": "advanced"
-  }
+  },
+  "requiresPassword": true,
+  "password": "NoAccess2025"
 }

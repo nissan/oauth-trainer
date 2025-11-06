@@ -18,5 +18,7 @@
     "Explain claims, scopes, and audiences in identity systems",
     "Trace the evolution from LDAP through SAML, OAuth, OIDC, to FIDO"
   ],
-  "prerequisiteModules": []
+  "prerequisiteModules": [],
+  "requiresPassword": true,
+  "password": "NoAccess2025"
 }

@@ -21,5 +21,7 @@
     "description": "Mastered OpenID Connect authentication, ID Tokens, UserInfo, discovery, and session management",
     "icon": "🔓",
     "color": "intermediate"
-  }
+  },
+  "requiresPassword": true,
+  "password": "NoAccess2025"
 }
