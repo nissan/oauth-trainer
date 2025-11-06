@@ -318,7 +318,11 @@ export function ModuleClient({
   // Wrap content with password gate if required
   if (metadata.requiresPassword && metadata.password) {
     return (
-      <PasswordGate password={metadata.password} moduleId={metadata.id}>
+      <PasswordGate
+        password={metadata.password}
+        moduleId={metadata.id}
+        moduleName={metadata.title}
+      >
         {moduleContent}
       </PasswordGate>
     );

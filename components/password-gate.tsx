@@ -9,12 +9,13 @@ import { Lock, Unlock } from "lucide-react"
 interface PasswordGateProps {
   password: string
   moduleId: string
+  moduleName: string
   children: React.ReactNode
 }
 
 const STORAGE_KEY_PREFIX = "oauth_trainer_password_"
 
-export function PasswordGate({ password, moduleId, children }: PasswordGateProps) {
+export function PasswordGate({ password, moduleId, moduleName, children }: PasswordGateProps) {
   const [enteredPassword, setEnteredPassword] = useState("")
   const [isUnlocked, setIsUnlocked] = useState(false)
   const [error, setError] = useState(false)
@@ -63,7 +64,7 @@ export function PasswordGate({ password, moduleId, children }: PasswordGateProps
           </div>
           <CardTitle className="text-center text-2xl">Password Required</CardTitle>
           <CardDescription className="text-center">
-            This is a premium module. Enter the password to access the Applied Case Study.
+            This is a premium module. Enter the password to access <strong>{moduleName}</strong>.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -90,6 +91,38 @@ export function PasswordGate({ password, moduleId, children }: PasswordGateProps
               Unlock Module
             </Button>
           </form>
+          <div className="mt-6 border-t pt-4">
+            <p className="text-center text-sm text-muted-foreground">
+              Need access? Contact{" "}
+              <a
+                href="https://twitter.com/redditech"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-primary hover:underline"
+              >
+                @redditech
+              </a>{" "}
+              on X/Twitter or{" "}
+              <a
+                href="https://t.me/redditech"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-primary hover:underline"
+              >
+                Telegram
+              </a>
+            </p>
+            <div className="mt-3 text-center">
+              <a
+                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Hi @redditech, I'd like to request access to the "${moduleName}" module in OAuth Trainer. Could you please provide the access password?`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-primary hover:underline"
+              >
+                Click here to send a pre-filled message on X/Twitter →
+              </a>
+            </div>
+          </div>
         </CardContent>
       </Card>
     </div>
