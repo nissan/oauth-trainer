@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import posthog from 'posthog-js';
+import { captureEvent } from "@/lib/analytics";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -203,7 +203,7 @@ export function ModuleClient({
                       : completedLessons === totalLessons
                         ? "Review Lessons"
                         : "Continue Learning";
-                  posthog.capture("learning_module_cta_clicked", {
+                  captureEvent("learning_module_cta_clicked", {
                     module_slug: moduleSlug,
                     module_title: metadata.title,
                     cta_text: ctaText,
@@ -310,7 +310,7 @@ export function ModuleClient({
                   const ctaText = moduleProgress?.completed
                     ? "Retake Quiz"
                     : "Take Quiz";
-                  posthog.capture("module_quiz_cta_clicked", {
+                  captureEvent("module_quiz_cta_clicked", {
                     module_slug: moduleSlug,
                     module_title: metadata.title,
                     cta_text: ctaText,

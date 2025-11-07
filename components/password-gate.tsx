@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Lock, Unlock } from "lucide-react"
-import posthog from "posthog-js"
+import { captureEvent } from "@/lib/analytics"
 
 interface PasswordGateProps {
   password: string
@@ -35,7 +35,7 @@ export function PasswordGate({ password, moduleId, moduleName, children }: Passw
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (enteredPassword === password) {
-      posthog.capture("module_unlock_attempted", {
+      captureEvent("module_unlock_attempted", {
         moduleId,
         moduleName,
         success: true,
@@ -46,7 +46,7 @@ export function PasswordGate({ password, moduleId, moduleName, children }: Passw
       const storageKey = `${STORAGE_KEY_PREFIX}${moduleId}`
       localStorage.setItem(storageKey, password)
     } else {
-      posthog.capture("module_unlock_attempted", {
+      captureEvent("module_unlock_attempted", {
         moduleId,
         moduleName,
         success: false,

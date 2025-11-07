@@ -1,6 +1,6 @@
 "use client"
 
-import posthog from 'posthog-js'
+import { captureEvent } from "@/lib/analytics"
 import Link from "next/link"
 import type { Lesson, LessonProgress } from "@/types"
 import {
@@ -24,7 +24,7 @@ export function LessonCard({ lesson, progress, moduleSlug }: LessonCardProps) {
     <Link href={`/learn/${moduleSlug}/${lesson.slug}`}>
       <Card
         onClick={() => {
-          posthog.capture("lesson_card_clicked", {
+          captureEvent("lesson_card_clicked", {
             lesson_slug: lesson.slug,
             lesson_title: lesson.title,
             lesson_order: lesson.order,

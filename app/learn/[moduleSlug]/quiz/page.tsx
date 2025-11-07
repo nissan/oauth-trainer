@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import posthog from 'posthog-js'
+import { captureEvent } from "@/lib/analytics"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -115,7 +115,7 @@ export default function QuizPage({ params }: { params: Promise<{ moduleSlug: str
     const finalScore = Math.round((correctCount / totalQuestions) * 100)
     const passed = finalScore >= PASSING_SCORE
 
-    posthog.capture('quiz_completed', {
+    captureEvent('quiz_completed', {
       module_id: module.id,
       module_slug: moduleSlug,
       score: finalScore,
@@ -152,7 +152,7 @@ export default function QuizPage({ params }: { params: Promise<{ moduleSlug: str
 
   // Handle retry
   const handleRetry = () => {
-    posthog.capture('quiz_retried', {
+    captureEvent('quiz_retried', {
       module_id: module.id,
       module_slug: moduleSlug,
       previous_score: score,

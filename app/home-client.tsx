@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import posthog from 'posthog-js'
+import { captureEvent } from "@/lib/analytics"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
@@ -72,7 +72,7 @@ export function HomeClient({ modules }: HomeClientProps) {
                 size="lg"
                 className="text-lg"
                 onClick={() => {
-                  posthog.capture('learning_cta_clicked', {
+                  captureEvent('learning_cta_clicked', {
                     cta_text: hasStarted ? "Continue Learning" : "Start Learning",
                     location: 'hero'
                   })
@@ -87,7 +87,7 @@ export function HomeClient({ modules }: HomeClientProps) {
                 variant="outline"
                 className="text-lg"
                 onClick={() => {
-                  posthog.capture('progress_cta_clicked', {
+                  captureEvent('progress_cta_clicked', {
                     cta_text: hasStarted ? "View Progress" : "Learn More",
                     location: 'hero'
                   })
@@ -234,7 +234,7 @@ export function HomeClient({ modules }: HomeClientProps) {
               size="lg"
               className="text-lg"
               onClick={() => {
-                posthog.capture('learning_cta_clicked', {
+                captureEvent('learning_cta_clicked', {
                   cta_text: 'Begin Your Journey',
                   location: 'footer_cta'
                 })

@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import type { Module, ModuleProgress } from "@/types"
-import posthog from "posthog-js"
+import { captureEvent } from "@/lib/analytics"
 import {
   Card,
   CardContent,
@@ -47,7 +47,7 @@ export function ModuleCard({ module, progress, locked = false }: ModuleCardProps
       actionType = "Continue Learning"
     }
 
-    posthog.capture("module-card-cta-clicked", {
+    captureEvent("module-card-cta-clicked", {
       module_slug: module.slug,
       module_title: module.title,
       action_type: actionType,

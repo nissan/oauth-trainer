@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import posthog from 'posthog-js';
+import { captureEvent } from "@/lib/analytics"
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -68,7 +68,7 @@ export function LessonClient({
 
   const handleCompleteLesson = () => {
     const timeSpent = Math.round((Date.now() - lessonStartTime) / 1000 / 60); // minutes
-    posthog.capture('lesson_marked_complete', {
+    captureEvent('lesson_marked_complete', {
         moduleSlug,
         lessonSlug,
         lessonId,
@@ -82,7 +82,7 @@ export function LessonClient({
 
   const handleNext = () => {
     if (nextLesson) {
-        posthog.capture('lesson_navigation', {
+        captureEvent('lesson_navigation', {
             direction: 'next',
             moduleSlug,
             lessonSlug,
@@ -155,7 +155,7 @@ export function LessonClient({
             <Link
               href={`/learn/${previousLesson.moduleSlug}/${previousLesson.lessonSlug}`}
               onClick={() => {
-                posthog.capture('lesson_navigation', {
+                captureEvent('lesson_navigation', {
                     direction: 'previous',
                     moduleSlug,
                     lessonSlug,
@@ -184,7 +184,7 @@ export function LessonClient({
             </Button>
           ) : (
             <Link href={`/learn/${moduleSlug}/quiz`} onClick={() => {
-                posthog.capture('lesson_navigation', {
+                captureEvent('lesson_navigation', {
                     direction: 'quiz',
                     moduleSlug,
                     lessonSlug,

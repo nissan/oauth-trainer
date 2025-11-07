@@ -12,7 +12,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { getAllCaseStudyResponses } from "@/lib/storage";
 import { Download, Share2, Twitter } from "lucide-react";
-import posthog from 'posthog-js';
+import { captureEvent } from "@/lib/analytics"
 
 interface Lesson {
   id: string;
@@ -53,7 +53,7 @@ export function SummaryClient({
   const totalLessons = lessons.length;
 
   const handleDownloadPDF = async () => {
-    posthog.capture('case-study-summary-downloaded', {
+    captureEvent('case-study-summary-downloaded', {
       moduleSlug,
       moduleId,
       moduleTitle,
@@ -131,7 +131,7 @@ export function SummaryClient({
   };
 
   const handleShareTwitter = () => {
-    posthog.capture('case-study-summary-shared', {
+    captureEvent('case-study-summary-shared', {
       platform: 'twitter',
       moduleSlug,
       moduleId,
@@ -147,7 +147,7 @@ export function SummaryClient({
   };
 
   const handleShareLinkedIn = () => {
-    posthog.capture('case-study-summary-shared', {
+    captureEvent('case-study-summary-shared', {
       platform: 'linkedin',
       moduleSlug,
       moduleId,
